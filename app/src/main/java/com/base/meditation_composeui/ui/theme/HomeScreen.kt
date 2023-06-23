@@ -16,11 +16,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalOf
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.base.meditation_composeui.BottomMenuItem
 import com.base.meditation_composeui.Features
 import com.base.meditation_composeui.R
 
@@ -62,6 +64,25 @@ fun HomeScreen(){
          ))
 
      }
+        BottomMenu(items = listOf(
+            BottomMenuItem(
+                "Home",R.drawable.home,
+            ),
+            BottomMenuItem(
+                title = "Meditate",R.drawable.meditate
+            ),
+            BottomMenuItem(
+                title = "Sleep",R.drawable.moon
+            ),
+            BottomMenuItem(
+                title = "Music",R.drawable.music
+            ),
+            BottomMenuItem(
+                title = "Profile",R.drawable.profile
+            )
+        ),
+            modifier = Modifier.align(Alignment.BottomCenter)
+        )
     }
 }
 
@@ -82,14 +103,14 @@ fun GreetingSection(
                 text = "Good morning $name",
                 fontWeight = FontWeight.Bold,
                 fontStyle = FontStyle.Italic,
-                fontSize = 12.sp,
+                fontSize = 14.sp,
                 color = TextWhite
             )
             Text(
                 text = "Have a good day today",
                 fontWeight = FontWeight.Bold,
                 fontStyle = FontStyle.Italic,
-                fontSize = 12.sp,
+                fontSize = 14.sp,
                 color = TextWhite
             )
         }
@@ -126,7 +147,7 @@ fun ChipSection(
                     )
                     .padding(15.dp)
             ){
-                Text(text=chips[it],color= TextWhite, fontSize = 12.sp,
+                Text(text=chips[it],color= TextWhite, fontSize = 14.sp,
                     fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic)
             }
         }
@@ -151,7 +172,7 @@ fun CurrentMeditation(
                 color= TextWhite,
                 fontStyle = FontStyle.Italic,
                 fontWeight = FontWeight.Bold,
-                fontSize = 12.sp
+                fontSize = 14.sp
 
             )
 
@@ -160,7 +181,7 @@ fun CurrentMeditation(
                 color= TextWhite,
                 fontStyle = FontStyle.Italic,
                 fontWeight = FontWeight.Bold,
-                fontSize = 12.sp
+                fontSize = 14.sp
             )
         }
         Box(
@@ -192,7 +213,7 @@ fun FeatureSection(
             color = TextWhite,
             fontStyle = FontStyle.Italic,
             fontWeight = FontWeight.Bold,
-            fontSize = 20.sp,
+            fontSize = 18.sp,
             modifier = Modifier.padding(start = 20.dp,top=23.dp)
         )
         LazyVerticalGrid(
@@ -224,14 +245,14 @@ fun FeatureItem(
             fontSize = 14.sp,
             fontWeight = FontWeight.Bold,
             fontStyle = FontStyle.Italic,
-            color = TextWhite,
+            color = Color.Black,
             modifier = Modifier.align(Alignment.TopStart)
                 .padding(20.dp)
         )
         Icon(
             painter = painterResource(id = features.iconid),
             contentDescription = "Images",
-            tint = Color.White,
+            tint = Color.Black,
             modifier = Modifier.align(Alignment.BottomStart)
                 .padding(20.dp)
         )
@@ -239,9 +260,84 @@ fun FeatureItem(
        Icon(
            painter = painterResource(R.drawable.baseline_start_24),
            contentDescription = "Start",
-           tint = Color.White,
+           tint = Color.Black,
            modifier = Modifier.align(Alignment.BottomEnd)
                .padding(20.dp)
        )
+    }
+}
+
+
+@Composable
+fun BottomMenu(
+    items:List<BottomMenuItem>,
+    modifier: Modifier=Modifier,
+    activehighlightcolor:Color= ButtonBlue,
+    activeTextColor:Color=Color.White,
+    inactiveTextcolor:Color= AquaBlue,
+    selectedindex:Int=0
+){
+ var selectedindex by remember {
+     mutableStateOf(selectedindex)
+ }
+    Row(
+        horizontalArrangement = Arrangement.SpaceAround,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier.fillMaxWidth()
+            .background(DeepBlue)
+            .padding(15.dp)
+    ){
+        items.forEachIndexed{index,item ->
+          BottomMenuItems(item=item,
+              isseleted = index==selectedindex,
+              activehighlightcolor=activehighlightcolor,
+              activeTextColor=activeTextColor,
+              inactiveTextcolor=inactiveTextcolor
+          ){
+            selectedindex=index
+          }
+        }
+    }
+}
+
+@Composable
+fun BottomMenuItems(
+    item:BottomMenuItem,
+    isseleted:Boolean=false,
+    activehighlightcolor:Color= ButtonBlue,
+    activeTextColor:Color=Color.White,
+    inactiveTextcolor:Color= AquaBlue,
+    onItemClick:()-> Unit
+){
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.clickable {
+            onItemClick()
+        }
+
+    ) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.clip(RoundedCornerShape(18.dp))
+                .background(
+                    if(isseleted) activehighlightcolor else Color.Transparent
+                )
+                .padding(10.dp)
+        ){
+            Icon(
+                painter = painterResource(id=item.iconid),
+                contentDescription = item.title,
+                tint = if(isseleted) activeTextColor else inactiveTextcolor,
+                modifier = Modifier.size(20.dp)
+            )
+        }
+        Text(
+            text = item.title,
+            color=if(isseleted) activeTextColor else inactiveTextcolor,
+            fontSize = 12.sp,
+            fontStyle = FontStyle.Italic,
+            fontWeight = FontWeight.Bold
+        )
     }
 }
