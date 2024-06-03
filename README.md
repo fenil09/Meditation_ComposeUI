@@ -3,5 +3,6 @@ we can use them to create simple yet Attractive User Interfaces. This Project al
 along with the selected item functionality which allows the user to know about the item being selected at a particular point in time.
 
 
-![Meditation1](https://github.com/fenil09/Meditation_ComposeUI/assets/112484094/40e19742-ce56-49a8-b77c-2729828589b4)
-![meditation2](https://github.com/fenil09/Meditation_ComposeUI/assets/112484094/906352dc-77d2-4394-8cf0-bfbf6b784326)
+
+<img src="https://github.com/fenil09/Meditation_ComposeUI/assets/112484094/5bf63b0c-d359-458c-919c-87d4d916713b" alt="Description" style="width:250px;height:500px;">
+
