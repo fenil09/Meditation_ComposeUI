@@ -4,7 +4,8 @@ along with the selected item functionality which allows the user to know about t
 
 
 
-<img src="https://github.com/fenil09/Meditation_ComposeUI/assets/112484094/5bf63b0c-d359-458c-919c-87d4d916713b" alt="Description" style="width:250px;height:500px;">
+<img src="https://github.com/fenil09/Meditation_ComposeUI/assets/112484094/5bf63b0c-d359-458c-919c-87d4d916713b" alt="Description" style="width:250px;height:500px;margin-right: 20px">
+
 <img src="https://github.com/fenil09/Meditation_ComposeUI/assets/112484094/a96d1c47-a772-463c-bae2-4d0a87b7f34e" alt="Description" style="width:250px;height:500px;">
 
 
